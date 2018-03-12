@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import "./Main.css";
-import InformationStatusBarContainer from "../../InformationStatusBarContainer/InformationStatusBarContainer";
 import LineStatusContainer from "../../LineStatusContainer/LineStatusContainer";
 import { retrieveStatuses } from "../../actions";
 
@@ -12,14 +11,8 @@ class App extends Component {
   }
 
   render() {
-    const refreshStatusList = () => this.props.retrieveStatuses();
-
     return (
       <div>
-        <InformationStatusBarContainer
-          refreshIntervalSeconds={120}
-          refreshCallback={refreshStatusList}
-        />
         <LineStatusContainer
           statusList={this.props.statuses}
           isLoading={this.props.isLoading}
