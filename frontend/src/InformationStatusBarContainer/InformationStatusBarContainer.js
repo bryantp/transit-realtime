@@ -13,7 +13,10 @@ const InformationStatusBarContainer = props => {
         <TimeInformation />
       </div>
       <div>
-        <RefreshCounter refreshIntervalSeconds={props.refreshIntervalSeconds} />
+        <RefreshCounter
+          refreshIntervalSeconds={props.refreshIntervalSeconds}
+          refreshCallback={props.refreshCallback}
+        />
       </div>
     </header>
   );

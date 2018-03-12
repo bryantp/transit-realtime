@@ -12,9 +12,14 @@ class App extends Component {
   }
 
   render() {
+    const refreshStatusList = () => this.props.retrieveStatuses();
+
     return (
       <div>
-        <InformationStatusBarContainer refreshIntervalSeconds={120} />
+        <InformationStatusBarContainer
+          refreshIntervalSeconds={120}
+          refreshCallback={refreshStatusList}
+        />
         <LineStatusContainer
           statusList={this.props.statuses}
           isLoading={this.props.isLoading}
