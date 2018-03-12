@@ -6,6 +6,7 @@ import re
 import logging
 import sys
 from .time import get_datetime
+from flask import Markup
 
 
 class StatusService:
@@ -20,6 +21,7 @@ class StatusService:
     IS_PLANNED_XPATH_QUERY = ".//siri:Planned/text()"
     ROUTE_XPATH_QUERY = ".//siri:AffectedVehicleJourney/siri:LineRef/text()"
     SUMMARY_XPATH_QUERY = ".//siri:Summary/text()"
+    LONG_DESCRIPTION_QUERY = ".//siri:LongDescription/text()"
 
     logger = logging.getLogger()
     stream_handler = logging.StreamHandler(sys.stdout)
@@ -51,16 +53,19 @@ class StatusService:
             self.SUMMARY_XPATH_QUERY, namespaces=self.NAME_SPACES)
 
         if start_time and not self.__is_started(str(start_time[0])):
-            self.logger.debug("Situation hasn't started yet. Start Time: {0}".format(start_time[0]))
+            self.logger.debug(
+                "Situation hasn't started yet. Start Time: {0}".format(start_time[0]))
             return False
 
         # Check for an end time, and see if it has passed or not.
         if end_time and self.__is_expired(str(end_time[0])):
-            self.logger.debug("Situation has expired. End Time: {0}".format(end_time[0]))
+            self.logger.debug(
+                "Situation has expired. End Time: {0}".format(end_time[0]))
             return False
 
         if summary and re.search("resumed", summary[0], re.IGNORECASE):
-            self.logger.debug("Situation has resumed. Summary: {0}".format(summary[0]))
+            self.logger.debug(
+                "Situation has resumed. Summary: {0}".format(summary[0]))
             return False
 
         return True
@@ -75,7 +80,7 @@ class StatusService:
         """Determine if the given situation is expired"""
         end_timestamp = get_datetime(end_time)
         now = datetime.now(pytz.timezone('US/Eastern'))
-        return now >= end_timestamp 
+        return now >= end_timestamp
 
     def __create_situation(self, situation):
         """Generate list delay reason"""
@@ -87,6 +92,9 @@ class StatusService:
             self.REASON_XPATH_QUERY, namespaces=self.NAME_SPACES)
         routes = situation.xpath(
             self.ROUTE_XPATH_QUERY, namespaces=self.NAME_SPACES)
+        long_description = situation.xpath(
+            self.LONG_DESCRIPTION_QUERY, namespaces=self.NAME_SPACES
+        )
 
         if start_time:
             start_time = get_datetime(str(start_time[0]))
@@ -99,19 +107,25 @@ class StatusService:
 
         if routes:
             routes = {str(route).strip() for route in routes}
-        
-        return Situation(start_time, end_time, reason, routes)
+
+        if long_description:
+            # going to trust the MTA here
+            long_description = Markup(str(long_description[0])).unescape()
+
+        return Situation(start_time, end_time, reason, routes, long_description)
+
 
 class Situation:
     """Contains information about an alert"""
 
     DATE_TIME_FORMAT = "%m/%d/%Y %H:%M:%S"
 
-    def __init__(self, start_time, end_time, reason, routes):
+    def __init__(self, start_time, end_time, reason, routes, long_description):
         self.__start_time = start_time
         self.__end_time = end_time
         self.__reason = reason
-        self.routes = routes
+        self.__routes = routes
+        self.__long_description = long_description
 
     @property
     def start_time(self):
@@ -124,6 +138,14 @@ class Situation:
     @property
     def reason(self):
         return self.__reason
+
+    @property
+    def routes(self):
+        return self.__routes
+
+    @property
+    def long_description(self):
+        return self.__long_description
 
     def __repr__(self):
         if self.start_time and self.end_time:

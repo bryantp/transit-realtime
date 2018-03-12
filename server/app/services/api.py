@@ -20,7 +20,7 @@ class ApiService:
                 route_info = self.route_service.get_route_from_identifier(
                     situation_route)
                 response = ApiStatusResponse(
-                    situation.reason, route_info, situation.start_time, situation.end_time)
+                    situation.reason, route_info, situation.start_time, situation.end_time, situation.long_description)
                 statuses.add(response)
         as_serialized_list = [status.serialize() for status in statuses]
         return jsonify(as_serialized_list)
@@ -29,7 +29,7 @@ class ApiService:
 class ApiStatusResponse:
     """Response containing the Situation and Route information"""
 
-    def __init__(self, reason, route, start_time, end_time):
+    def __init__(self, reason, route, start_time, end_time, long_description):
         self.__reason = reason
         self.__route = route
         self.__start_time = start_time
@@ -37,6 +37,7 @@ class ApiStatusResponse:
             self.__end_time = end_time
         else:
             self.__end_time = ''
+        self.__long_description = long_description
 
     @property
     def reason(self):
@@ -54,6 +55,10 @@ class ApiStatusResponse:
     def route(self):
         return self.__route
 
+    @property
+    def long_description(self):
+        return self.__long_description
+
     def __eq__(self, other):
         """Determine equality based on the contained route ID"""
         if isinstance(self, other.__class__):
@@ -69,4 +74,5 @@ class ApiStatusResponse:
             'startTime': self.__start_time,
             'endTime': self.__end_time,
             'route': self.__route.serialize(),
+            'longDescription': self.__long_description
         }
