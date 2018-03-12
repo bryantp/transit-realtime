@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import "./App.css";
-import InformationStatusBarContainer from "./InformationStatusBarContainer/InformationStatusBarContainer";
-import LineStatusContainer from "./LineStatusContainer/LineStatusContainer";
-import { retrieveStatuses } from "./actions";
+import "./Main.css";
+import InformationStatusBarContainer from "../../InformationStatusBarContainer/InformationStatusBarContainer";
+import LineStatusContainer from "../../LineStatusContainer/LineStatusContainer";
+import { retrieveStatuses } from "../../actions";
 
 class App extends Component {
   componentDidMount() {

@@ -4,9 +4,11 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import createBrowserHistory from "history/createBrowserHistory";
 
 import "./index.css";
-import App from "./App";
+import Main from "./routes/Main/Main";
 import registerServiceWorker from "./registerServiceWorker";
 
 import { STATUSES_RECEIVED } from "./actions";
@@ -30,11 +32,16 @@ const reducer = (state = defaultState, action) => {
 };
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
+const history = createBrowserHistory();
 
 const run = () =>
   ReactDOM.render(
     <Provider store={store}>
-      <App />
+      <HashRouter history={history}>
+        <Switch>
+          <Route exact path="/" name="Main" component={Main} />
+        </Switch>
+      </HashRouter>
     </Provider>,
     document.getElementById("root")
   );
