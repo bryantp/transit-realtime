@@ -20,7 +20,7 @@ class ApiService:
                 route_info = self.route_service.get_route_from_identifier(
                     situation_route)
                 response = ApiStatusResponse(
-                    situation.reason, route_info, situation.start_time)
+                    situation.reason, route_info, situation.start_time, situation.end_time)
                 statuses.add(response)
         as_serialized_list = [status.serialize() for status in statuses]
         return jsonify(as_serialized_list)
@@ -29,10 +29,14 @@ class ApiService:
 class ApiStatusResponse:
     """Response containing the Situation and Route information"""
 
-    def __init__(self, reason, route, start_time):
+    def __init__(self, reason, route, start_time, end_time):
         self.__reason = reason
         self.__route = route
         self.__start_time = start_time
+        if end_time:
+            self.__end_time = end_time
+        else:
+            self.__end_time = ''
 
     @property
     def reason(self):
@@ -41,6 +45,10 @@ class ApiStatusResponse:
     @property
     def start_time(self):
         return self.__start_time
+
+    @property
+    def end_time(self):
+        return self.__end_time
 
     @property
     def route(self):
@@ -59,5 +67,6 @@ class ApiStatusResponse:
         return {
             'reason': self.__reason,
             'startTime': self.__start_time,
+            'endTime': self.__end_time,
             'route': self.__route.serialize(),
         }
