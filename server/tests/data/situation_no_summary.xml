@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Siri xmlns="http://www.siri.org.uk/siri" xmlns:ns2="http://www.ifopt.org.uk/acsb" xmlns:ns3="http://www.ifopt.org.uk/ifopt" xmlns:ns4="http://datex2.eu/schema/1_0/1_0">
+   <ServiceDelivery>
+      <ResponseTimestamp>2018-03-03T15:15:03.0165892-05:00</ResponseTimestamp>
+      <SituationExchangeDelivery>
+         <ResponseTimestamp>2018-03-03T15:15:03.0165892-05:00</ResponseTimestamp>
+         <Status>true</Status>
+         <Situations>
+            <PtSituationElement>
+               <CreationTime>2018-03-03T14:16:30.207-05:00</CreationTime>
+               <SituationNumber>MTA NYCT_d4051c31-f72e-468f-be64-7f8824f593ed</SituationNumber>
+               <PublicationWindow>
+                  <StartTime>{0}</StartTime>
+                  <EndTime>{1}</EndTime>
+               </PublicationWindow>
+               <Summary xml:lang="EN"></Summary>
+               <Description xml:lang="EN"></Description>
+               <LongDescription></LongDescription>
+               <Planned>false</Planned>
+               <ReasonName>Delays</ReasonName>
+               <MessagePriority>2</MessagePriority>
+               <Source>
+                  <SourceType>directReport</SourceType>
+               </Source>
+               <Affects>
+                  <VehicleJourneys>
+                     <AffectedVehicleJourney>
+                        <LineRef>MTA NYCT_6</LineRef>
+                        <DirectionRef>1</DirectionRef>
+                     </AffectedVehicleJourney>
+                  </VehicleJourneys>
+               </Affects>
+               <Consequences>
+                  <Consequence>
+                     <Condition>delayed</Condition>
+                     <Severity>undefined</Severity>
+                  </Consequence>
+               </Consequences>
+            </PtSituationElement>
+         </Situations>
+      </SituationExchangeDelivery>
+   </ServiceDelivery>
+</Siri>

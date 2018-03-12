@@ -1,0 +1,61 @@
+.header {
+  background-color: beige;
+  display: flex;
+}
+
+.header div:nth-child(1) {
+  flex: 25%;
+}
+
+.header div:nth-child(2) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 50%;
+  text-align: center;
+}
+
+.header div:nth-child(3) {
+  flex: 25%;
+  text-align: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header div:nth-child(3) > div {
+  padding-right: 1em;
+}
+
+.header button {
+  border: none;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  background-color: #e7e7e7;
+  color: black;
+}
+
+.header button:hover {
+  background-color: #cfcfcf;
+}
+
+@media only screen and (max-width: 480px) {
+  .header div:nth-child(1) {
+    flex: 50%;
+  }
+
+  .time_information {
+    display: none !important;
+  }
+
+  .header div:nth-child(3) {
+    flex: 50%;
+    text-align: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

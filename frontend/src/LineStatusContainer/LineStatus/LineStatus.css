@@ -1,0 +1,35 @@
+.line_status {
+    display: flex;
+    height: 2rem;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Helvetica';
+    font-weight: 600;
+    border: 5px solid black;
+    border-radius: 25px;
+}
+
+
+.line_status .status {
+    flex: 75%;
+    margin-left: 2rem;
+}
+
+.line_status .line_number {
+    margin-right: 1rem;
+}
+
+
+.alert_notifier {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+    50% { background-color: red; }
+}
+
+@media only screen and (max-width : 480px) {
+    .line_status .status .reported_line{
+        display: none;
+    }
+}

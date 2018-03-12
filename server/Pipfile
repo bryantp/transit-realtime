@@ -1,0 +1,19 @@
+[[source]]
+
+verify_ssl = true
+url = "https://pypi.python.org/simple"
+name = "pypi"
+
+
+[dev-packages]
+
+coverage = "*"
+
+
+[packages]
+
+gtfs-realtime-bindings = "*"
+requests = "*"
+lxml = "*"
+pytz = "*"
+flask = "*"

@@ -1,0 +1,9 @@
+.status_list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.status_list ul li {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
