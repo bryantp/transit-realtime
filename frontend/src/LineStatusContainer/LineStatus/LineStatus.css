@@ -1,6 +1,6 @@
 .line_status {
     display: flex;
-    height: 2rem;
+    height: 4rem;
     justify-content: center;
     align-items: center;
     font-family: 'Helvetica';
@@ -13,10 +13,12 @@
 .line_status .status {
     flex: 75%;
     margin-left: 2rem;
+    font-size: 1.6em;
 }
 
 .line_status .line_number {
     margin-right: 1rem;
+    font-size: 2em;
 }
 
 
