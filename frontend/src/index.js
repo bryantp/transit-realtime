@@ -5,16 +5,17 @@ import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import createBrowserHistory from "history/createBrowserHistory";
 import registerServiceWorker from "./registerServiceWorker";
 
 import "./index.css";
 import Main from "./routes/Main/Main";
+import RouteDetail from "./routes/RouteDetail/RouteDetail";
 import InformationStatusBarContainer from "./InformationStatusBarContainer/InformationStatusBarContainer";
 import { STATUSES_RECEIVED } from "./actions";
 
 const defaultState = {
   isLoading: true,
+  isLoaded: false,
   selectedLineIds: [],
   statuses: []
 };
@@ -24,7 +25,8 @@ const reducer = (state = defaultState, action) => {
     case STATUSES_RECEIVED:
       return Object.assign({}, state, {
         statuses: action.payload,
-        isLoading: false
+        isLoading: false,
+        isLoaded: true
       });
     default:
       return state;
@@ -32,7 +34,6 @@ const reducer = (state = defaultState, action) => {
 };
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));
-const history = createBrowserHistory();
 
 const refreshStatusList = () => this.props.retrieveStatuses();
 
@@ -50,9 +51,15 @@ const run = () =>
   ReactDOM.render(
     <Provider store={store}>
       <Wrapper>
-        <HashRouter history={history}>
+        <HashRouter>
           <Switch>
             <Route exact path="/" name="Main" component={Main} />
+            <Route
+              exact
+              path="/detail/:id"
+              name="Detail"
+              component={RouteDetail}
+            />
           </Switch>
         </HashRouter>
       </Wrapper>

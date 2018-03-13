@@ -7,7 +7,9 @@ import { retrieveStatuses } from "../../actions";
 
 class App extends Component {
   componentDidMount() {
-    this.props.retrieveStatuses();
+    if (!this.props.isLoaded) {
+      this.props.retrieveStatuses();
+    }
   }
 
   render() {
@@ -25,6 +27,7 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     isLoading: state.isLoading,
+    isLoaded: state.isLoaded,
     statuses: state.statuses
   };
 };
