@@ -13,12 +13,12 @@
 .line_status .status {
     flex: 75%;
     margin-left: 2rem;
-    font-size: 1.6em;
+    font-size: 1.4em;
 }
 
 .line_status .line_number {
     margin-right: 1rem;
-    font-size: 2em;
+    font-size: 1.8em;
 }
 
 
