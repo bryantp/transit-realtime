@@ -28,7 +28,6 @@ class RouteService:
 
     def __generate_key(self, row):
         """Generate the key for the given Route"""
-        # MTA NYCT_1
         agency_id = row[self.AGENCY_ID_KEY]
         route_id = row[self.ROUTE_ID_KEY]
         return "{0}_{1}".format(agency_id, route_id)
