@@ -1,6 +1,5 @@
 from .status import StatusService
 from .routes import RouteService
-from flask import jsonify
 
 
 class ApiService:
@@ -22,8 +21,7 @@ class ApiService:
                 response = ApiStatusResponse(
                     situation.reason, route_info, situation.start_time, situation.end_time, situation.long_description)
                 statuses.add(response)
-        as_serialized_list = [status.serialize() for status in statuses]
-        return jsonify(as_serialized_list)
+        return [status.serialize() for status in statuses]
 
 
 class ApiStatusResponse:

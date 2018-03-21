@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 from flask import jsonify
 from flask_cors import CORS
+from flask import jsonify
 
 from app.services.api import ApiService
 
@@ -11,4 +12,5 @@ API_SERVICE = ApiService()
 
 @app.route('/api/status')
 def status_api():
-    return API_SERVICE.get_line_statuses()
+    statuses = API_SERVICE.get_line_statuses()
+    return jsonify(statuses)
