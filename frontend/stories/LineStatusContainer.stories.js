@@ -1,6 +1,7 @@
 import React from "react";
 
 import { storiesOf } from "@storybook/react";
+import { MemoryRouter } from "react-router-dom";
 import LineStatusContainer from "../src/LineStatusContainer/LineStatusContainer";
 
 const fourLineStatuses = [
@@ -190,6 +191,9 @@ const longList = [
 ];
 
 storiesOf("LineStatusContainer", module)
+  .addDecorator(story => (
+    <MemoryRouter>{story()}</MemoryRouter>
+  ))
   .add("Is Loading", () => <LineStatusContainer isLoading={true} />)
   .add("4 Lines", () => <LineStatusContainer statusList={fourLineStatuses} />)
   .add("Many Lines", () => <LineStatusContainer statusList={longList} />);
