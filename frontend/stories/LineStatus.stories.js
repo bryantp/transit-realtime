@@ -2,8 +2,13 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 import LineStatus from "../src/LineStatusContainer/LineStatus/LineStatus";
+import { MemoryRouter } from "react-router-dom";
+
 
 storiesOf("LineStatus", module)
+  .addDecorator(story => (
+    <MemoryRouter>{story()}</MemoryRouter>
+  ))
   .add("Delayed 6 Express Line", () => (
     <LineStatus
       route="6"
