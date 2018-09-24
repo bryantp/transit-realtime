@@ -2,6 +2,7 @@ import fetch from "cross-fetch";
 
 export const STATUSES_RECEIVED = "STATUSES_RECEIVED";
 export const RETRIEVING_STATUSES = "RETRIEVING_STATUSES";
+export const ERROR_DURING_RETRIEVAL = "ERROR_DURING_RETRIEVAL";
 
 export function statusesRetrieved(statuses) {
   return {
@@ -16,6 +17,13 @@ export function retrievingStatuses() {
   };
 }
 
+export function errorDuringRetrieval(error) {
+  return {
+    type: ERROR_DURING_RETRIEVAL,
+    error: error
+  };
+}
+
 export function retrieveStatuses() {
   return dispatch => {
     // Update the state to be in the process of retrieving the statuses
@@ -23,8 +31,9 @@ export function retrieveStatuses() {
     return fetch("http://localhost:5000/api/status")
       .then(
         response => response.json(),
-        error => console.log("An error occurred.", error)
+        error => {throw new Error(error)}
       )
-      .then(json => dispatch(statusesRetrieved(json)));
+      .then(json => dispatch(statusesRetrieved(json)))
+      .catch(error => dispatch(errorDuringRetrieval(error)));
   };
 }

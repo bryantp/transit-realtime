@@ -1,10 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
+import DeviceInfo from "./DeviceInfo/DeviceInfo";
 
 const Menu = props => {
   return (
     <div>
-        This is a Menu
+        {<DeviceInfo />}
     </div>
   );
 };

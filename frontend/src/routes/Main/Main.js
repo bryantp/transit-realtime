@@ -18,6 +18,7 @@ class App extends Component {
         <LineStatusContainer
           statusList={this.props.statuses}
           isLoading={this.props.isLoading}
+          isInError={this.props.isInError}
         />
       </div>
     );
@@ -28,6 +29,7 @@ const mapStateToProps = state => {
   return {
     isLoading: state.isLoading,
     isLoaded: state.isLoaded,
+    isInError: state.isInError,
     statuses: state.statuses
   };
 };

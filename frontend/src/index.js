@@ -13,11 +13,12 @@ import Main from "./routes/Main/Main";
 import RouteDetail from "./routes/RouteDetail/RouteDetail";
 import Menu from "./routes/Menu/Menu";
 import InformationStatusBarContainer from "./InformationStatusBarContainer/InformationStatusBarContainer";
-import { STATUSES_RECEIVED, retrieveStatuses } from "./actions";
+import { STATUSES_RECEIVED, RETRIEVING_STATUSES, ERROR_DURING_RETRIEVAL, retrieveStatuses } from "./actions";
 
 const defaultState = {
   isLoading: true,
   isLoaded: false,
+  isInError: false,
   selectedLineIds: [],
   statuses: []
 };
@@ -29,6 +30,19 @@ const reducer = (state = defaultState, action) => {
         statuses: action.payload,
         isLoading: false,
         isLoaded: true
+      });
+    case RETRIEVING_STATUSES:
+      return Object.assign({}, state, {
+        statuses: [],
+        isLoading: true,
+        isLoaded: false
+      });
+    case ERROR_DURING_RETRIEVAL:
+      return Object.assign({}, state, {
+        statuses: [],
+        isLoading: false,
+        isLoaded: false,
+        isInError: true
       });
     default:
       return state;

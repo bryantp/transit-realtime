@@ -26,6 +26,10 @@ const LineStatusContainer = props => {
     return <div>Loading...</div>;
   }
 
+  if(props.isInError) {
+    return <div>Unable to retrieve statuses</div>;
+  }
+
   return (
     <div className="status_list">
       <ul>{renderStatusList}</ul>
