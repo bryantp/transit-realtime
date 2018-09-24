@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import "./index.css";
 import Main from "./routes/Main/Main";
 import RouteDetail from "./routes/RouteDetail/RouteDetail";
+import Menu from "./routes/Menu/Menu";
 import InformationStatusBarContainer from "./InformationStatusBarContainer/InformationStatusBarContainer";
 import { STATUSES_RECEIVED, retrieveStatuses } from "./actions";
 
@@ -49,9 +50,9 @@ const Wrapper = connect(state => ({}), { retrieveStatuses })(props => (
 const run = () =>
   ReactDOM.render(
     <Provider store={store}>
-      <Wrapper>
-        <HashRouter>
-          <Switch>
+      <HashRouter>
+        <Switch>
+          <Wrapper>
             <Route exact path="/" name="Main" component={Main} />
             <Route
               exact
@@ -59,9 +60,15 @@ const run = () =>
               name="Detail"
               component={RouteDetail}
             />
-          </Switch>
-        </HashRouter>
-      </Wrapper>
+            <Route
+              exact
+              path="/menu"
+              name="Menu"
+              component={Menu}
+            />
+          </Wrapper>
+        </Switch>
+      </HashRouter>
     </Provider>,
     document.getElementById("root")
   );
