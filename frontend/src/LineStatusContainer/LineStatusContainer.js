@@ -22,12 +22,19 @@ const LineStatusContainer = props => {
     );
   });
 
-  if (props.isLoading) {
-    return <div>Loading...</div>;
+ if (props.isLoading) {
+    return (
+    <div class="spinner">
+      <div class="rect1"></div>
+      <div class="rect2"></div>
+      <div class="rect3"></div>
+      <div class="rect4"></div>
+      <div class="rect5"></div>
+    </div>)
   }
 
   if(props.isInError) {
-    return <div>Unable to retrieve statuses</div>;
+    return <div className="error_status">Unable to retrieve statuses</div>;
   }
 
   return (
