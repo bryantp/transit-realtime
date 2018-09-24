@@ -10,7 +10,7 @@ class InformationStatusBarContainer extends React.Component {
     this.state = {menuOpen: false};
   }
 
-  getLink = () => this.state.menuOpen ? <Link to="/" onClick={() => this.setState({menuOpen: false})}>Home</Link> : <Link to="/menu" onClick={() => this.setState({menuOpen: true})}>Menu</Link>;
+  getLink = () => this.state.menuOpen ? <Link className="menu_url" to="/" onClick={() => this.setState({menuOpen: false})}>Home</Link> : <Link className="menu_url" to="/menu" onClick={() => this.setState({menuOpen: true})}>Menu</Link>;
   
   render() {
     return (
