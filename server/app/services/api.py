@@ -1,5 +1,6 @@
 from .status import StatusService
 from .routes import RouteService
+from .system.system_factory import get_service
 
 
 class ApiService:
@@ -9,6 +10,7 @@ class ApiService:
         self.status_service = StatusService()
         self.status_service.update_status()
         self.route_service = RouteService()
+        self.system_service = get_service()
 
     def get_line_statuses(self):
         """Return the list of Statuses for all the lines"""
@@ -22,6 +24,46 @@ class ApiService:
                     situation.reason, route_info, situation.start_time, situation.end_time, situation.long_description)
                 statuses.add(response)
         return [status.serialize() for status in statuses]
+
+    def get_system_info(self):
+        """
+        Return system information
+        - IP Address
+        - Connected to Network (Name if wifi)
+        - Free Disk Space
+        """
+        ip_addresses = self.system_service.get_ip_address()
+        wifi_name = self.system_service.get_connected_wifi()
+        free_disk_space = self.system_service.get_free_space_in_mb()
+        return SystemInfoResponse(ip_addresses, wifi_name, free_disk_space).serialize()
+
+
+class SystemInfoResponse:
+    """Response contains information about the system"""
+
+    def __init__(self, ip_addresses, wifi_names, free_disk_space_in_mb):
+        self.__ip_addresses = ip_addresses
+        self.__wifi_names = wifi_names
+        self.__free_disk_space_in_mb = free_disk_space_in_mb
+
+    @property
+    def ip_addresses(self):
+        return self.__ip_addresses
+
+    @property
+    def wifi_name(self):
+        return self.__wifi_names
+
+    @property
+    def free_disk_space_mb(self):
+        return self.__free_disk_space_in_mb
+
+    def serialize(self):
+        return {
+            'ipAddresses': self.__ip_addresses,
+            'wifiNames': self.__wifi_names,
+            'freeDiskSpaceInMb': self.__free_disk_space_in_mb,
+        }
 
 
 class ApiStatusResponse:

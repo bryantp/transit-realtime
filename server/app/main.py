@@ -14,3 +14,9 @@ API_SERVICE = ApiService()
 def status_api():
     statuses = API_SERVICE.get_line_statuses()
     return jsonify(statuses)
+
+
+@app.route('/api/system/')
+def system_info_api():
+    info = API_SERVICE.get_system_info()
+    return jsonify(info)
