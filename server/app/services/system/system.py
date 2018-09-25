@@ -5,6 +5,10 @@ import psutil
 
 class SystemService(ABC):
 
+    def __should_include_address(self, address):
+        """We want to strip out loopback addresses and IPV6"""
+        return address and address != '127.0.0.1' and ":" not in address
+
     def get_ip_address(self):
         """Return the IP Address of the system"""
         interfaces = ni.interfaces()
@@ -15,11 +19,11 @@ class SystemService(ABC):
             if ni.AF_LINK in address_families:
                 af_link = address_families[ni.AF_LINK]
                 ethernet_connections += [connection['addr']
-                                         for connection in af_link if connection['addr']]
+                                         for connection in af_link if self.__should_include_address(connection['addr'])]
             if ni.AF_INET in address_families:
                 af_inet = address_families[ni.AF_INET]
                 wireless_connections += [connection['addr']
-                                         for connection in af_inet if connection['addr']]
+                                         for connection in af_inet if self.__should_include_address(connection['addr'])]
 
         return wireless_connections + ethernet_connections
 
