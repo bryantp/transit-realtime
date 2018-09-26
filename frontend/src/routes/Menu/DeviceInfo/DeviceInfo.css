@@ -1,0 +1,35 @@
+.device_info_header {
+    margin: auto;
+    width: 9em;
+}  
+
+.device_info_table {
+    width: 100%; 
+    border-collapse: collapse; 
+}
+
+/* Zebra striping */
+tr:nth-of-type(odd) { 
+    background: #eee; 
+}
+
+.device_info_table th { 
+    background: #333; 
+    color: white; 
+    font-weight: bold; 
+}
+
+.device_info_table td, th { 
+    padding: 6px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+}
+
+.device_info_table td:first-child { 
+    font-weight:bold; 
+}
+
+.device_info_table td ul { 
+    list-style-type: none;
+    padding: 0;
+}

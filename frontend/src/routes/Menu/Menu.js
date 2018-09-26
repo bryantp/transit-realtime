@@ -1,12 +1,31 @@
-import React from "react";
-import DeviceInfo from "./DeviceInfo/DeviceInfo";
+import React, {Component} from "react";
+import { connect } from "react-redux";
 
-const Menu = props => {
-  return (
-    <div>
-        {<DeviceInfo />}
-    </div>
-  );
+import DeviceInfo from "./DeviceInfo/DeviceInfo";
+import {retrieveSystemInfo} from "../../actions";
+
+
+class Menu extends Component {
+  componentDidMount() {
+    if (!this.props.isSystemInfoLoaded) {
+      this.props.retrieveSystemInfo();
+    }
+  }
+
+  render() {
+    return (
+      <div>
+          {<DeviceInfo systemInfo={this.props.systemInfo}/>}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    isSystemInfoLoaded: state.isSystemInfoLoaded,
+    systemInfo: state.systemInfo
+  };
 };
 
-export default Menu;
+export default connect(mapStateToProps, { retrieveSystemInfo })(Menu);

@@ -13,14 +13,16 @@ import Main from "./routes/Main/Main";
 import RouteDetail from "./routes/RouteDetail/RouteDetail";
 import Menu from "./routes/Menu/Menu";
 import InformationStatusBarContainer from "./InformationStatusBarContainer/InformationStatusBarContainer";
-import { STATUSES_RECEIVED, RETRIEVING_STATUSES, ERROR_DURING_RETRIEVAL, retrieveStatuses } from "./actions";
+import { STATUSES_RECEIVED, RETRIEVING_STATUSES, ERROR_DURING_RETRIEVAL, SYSTEM_INFO_RETRIEVED, ERROR_RETRIEVING_SYSTEM_INFO, retrieveStatuses } from "./actions";
 
 const defaultState = {
   isLoading: true,
   isLoaded: false,
   isInError: false,
+  isSystemInfoLoaded: false,
   selectedLineIds: [],
-  statuses: []
+  statuses: [],
+  systemInfo: {}
 };
 
 const reducer = (state = defaultState, action) => {
@@ -33,7 +35,6 @@ const reducer = (state = defaultState, action) => {
       });
     case RETRIEVING_STATUSES:
       return Object.assign({}, state, {
-        statuses: [],
         isLoading: true,
         isLoaded: false
       });
@@ -42,6 +43,17 @@ const reducer = (state = defaultState, action) => {
         statuses: [],
         isLoading: false,
         isLoaded: false,
+        isInError: true
+      });
+    case SYSTEM_INFO_RETRIEVED:
+      return Object.assign({}, state, {
+        isSystemInfoLoaded: true,
+        systemInfo: action.payload,
+        isInError: false
+      });
+    case ERROR_RETRIEVING_SYSTEM_INFO:
+      return Object.assign({}, state, {
+        isSystemInfoLoaded: false,
         isInError: true
       });
     default:
