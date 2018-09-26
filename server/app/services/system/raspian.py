@@ -17,4 +17,4 @@ class RaspianSystemService(SystemService):
         ssids = self.ssid_pattern.search(str(output, "utf-8"))
         if ssids:
             return [ssid.strip().strip("\"") for ssid in ssids.groups()]
-        return None
+        return []

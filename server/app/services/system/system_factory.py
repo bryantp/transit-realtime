@@ -2,6 +2,7 @@ import sys
 
 from .raspian import RaspianSystemService
 from .windows_10 import WindowsSystemService
+from .mac import MacOsSystemService
 
 
 def get_service():
@@ -9,3 +10,5 @@ def get_service():
         return RaspianSystemService()
     if sys.platform.startswith('win'):
         return WindowsSystemService()
+    if sys.platform.startswith("darwin"):
+        return MacOsSystemService()
