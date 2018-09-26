@@ -15,7 +15,7 @@
 }
 
 .spinner {
-  margin: 100px auto;
+  margin: 1em auto;
   width: 500px;
   height: 400px;
   text-align: center;
@@ -23,7 +23,7 @@
 }
 
 .spinner > div {
-  background-color: beige;
+  background-color: #80ced6;
   height: 100%;
   width: 60px;
   display: inline-block;
