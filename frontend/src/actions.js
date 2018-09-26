@@ -7,10 +7,10 @@ export const RETRIEVING_SYSTEM_INFO = "RETRIEVING_SYSTEM_INFO";
 export const SYSTEM_INFO_RETRIEVED = "SYSTEM_INFO_RETRIEVED";
 export const ERROR_RETRIEVING_SYSTEM_INFO = "ERROR_RETRIEVING_SYSTEM_INFO";
 
-export function statusesRetrieved(statuses) {
+export function statusesRetrieved(payload) {
   return {
     type: STATUSES_RECEIVED,
-    payload: statuses
+    payload
   };
 }
 
@@ -23,7 +23,7 @@ export function retrievingStatuses() {
 export function errorDuringRetrieval(error) {
   return {
     type: ERROR_DURING_RETRIEVAL,
-    error: error
+    error
   };
 }
 
@@ -41,10 +41,10 @@ export function retrieveStatuses() {
   };
 }
 
-export function systemInfoRetrieved(info) {
+export function systemInfoRetrieved(payload) {
   return {
     type: SYSTEM_INFO_RETRIEVED,
-    payload: info
+    payload
   };
 }
 
@@ -57,7 +57,7 @@ export function retrievingSystemInfo() {
 export function errorRetrievingSystemInfo(error) {
   return {
     type: ERROR_RETRIEVING_SYSTEM_INFO,
-    error: error
+    error
   };
 }
 
