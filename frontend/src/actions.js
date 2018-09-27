@@ -31,7 +31,7 @@ export function retrieveStatuses() {
   return dispatch => {
     // Update the state to be in the process of retrieving the statuses
     dispatch(retrievingStatuses());
-    return fetch("http://localhost:5000/api/status")
+    fetch("http://localhost:5000/api/status")
       .then(
         response => response.json(),
         error => {throw new Error(error)}
@@ -66,7 +66,7 @@ export function retrieveSystemInfo() {
   return dispatch => {
     // Update the state to be in the process of retrieving the system info
     dispatch(retrievingSystemInfo());
-    return fetch("http://localhost:5000/api/system")
+    fetch("http://localhost:5000/api/system")
       .then(
         response => response.json(),
         error => {throw new Error(error)}
